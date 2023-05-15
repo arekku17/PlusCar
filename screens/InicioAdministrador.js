@@ -1,16 +1,43 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native';
-import Background from '../components/Background';
+import { StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCar, faUser, faVanShuttle } from '@fortawesome/free-solid-svg-icons';
+import { Combis, Taxistas, Yo } from './Administrador';
 
-const InicioAdministrador = ({ navigation }) => {
+const Tab = createBottomTabNavigator();
+
+const InicioUsuario = ({ navigation }) => {
   return (
-    <Background>
-      <Text>Administrador</Text>
-    </Background>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarItemStyle: { padding: 10 },
+        tabBarStyle: {height: 70}
+      }}
+    >
+      <Tab.Screen name="Taxistas" component={Taxistas} options={{
+          tabBarLabel: 'Taxistas',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faCar} color={color} size={size} />
+          ),
+        }}/>
+      <Tab.Screen name="Combis" component={Combis} options={{
+          tabBarLabel: 'Combis',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faVanShuttle} color={color} size={size} />
+          ),
+        }}/>
+      <Tab.Screen name="Yo" component={Yo} options={{
+          tabBarLabel: 'Yo',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faUser} color={color} size={size} />
+          ),
+        }} />
+    </Tab.Navigator>
   )
 }
 
-export default InicioAdministrador
+export default InicioUsuario
 
 const styles = StyleSheet.create({
   container: {

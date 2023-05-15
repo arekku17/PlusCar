@@ -6,11 +6,13 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
@@ -37,7 +39,7 @@ export default function LoginScreen({ navigation }) {
             <Header>Bienvenido.</Header>
 
             <View style={styles.buttons}>
-                <Button mode={tipo === "Usuario" ? "contained" : "outlined"} onPress={() => setTipo("Usuario")} style={{ flex: 1, marginRight: 10}} labelStyle={{ fontSize: 13 }}>
+                <Button mode={tipo === "Usuario" ? "contained" : "outlined"} onPress={() => setTipo("Usuario")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 13 }}>
                     Usuario
                 </Button>
                 <Button mode={tipo === "Conductor" ? "contained" : "outlined"} onPress={() => setTipo("Conductor")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 10 }}>
@@ -78,16 +80,33 @@ export default function LoginScreen({ navigation }) {
                     <Text style={styles.forgot}>¿Olvidó su contraseña?</Text>
                 </TouchableOpacity>
             </View>
-            <Button mode="contained" onPress={onLoginPressed}>
+            <Button mode="contained" onPress={onLoginPressed} icono={faRightFromBracket}>
                 Iniciar Sesión
             </Button>
+
+
+
             {
-                tipo === "Usuario" && <View style={styles.row}>
-                    <Text>¿No tienes una cuenta? </Text>
-                    <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-                        <Text style={styles.link}>Registrarse</Text>
-                    </TouchableOpacity>
-                </View>
+                tipo === "Usuario" && <>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
+                        <View>
+
+                            <Text style={{ width: 50, textAlign: 'center' }}>o</Text>
+                        </View>
+                        <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
+                    </View>
+
+                    <Button mode="outlined" onPress={() => { }} icono={faGoogle}>
+                        <Text> Continuar con Google </Text>
+                    </Button>
+                    <View style={styles.row}>
+                        <Text>¿No tienes una cuenta? </Text>
+                        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+                            <Text style={styles.link}>Registrarse</Text>
+                        </TouchableOpacity>
+                    </View>
+                </>
             }
 
         </Background>
@@ -102,7 +121,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        marginTop: 4,
+        marginTop: 10,
     },
     forgot: {
         fontSize: 13,

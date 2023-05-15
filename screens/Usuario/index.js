@@ -1,0 +1,5 @@
+export { default as Yo } from './Yo'
+export { default as Viajes } from './Viajes'
+export { default as Ubicacion } from './Ubicacion'
+export { default as Destino } from './Destino'
+export { default as Combis } from './Combis'
