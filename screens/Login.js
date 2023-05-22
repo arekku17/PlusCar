@@ -36,7 +36,7 @@ export default function LoginScreen({ navigation }) {
     return (
         <Background>
             <Logo />
-            <Header>Bienvenido.</Header>
+            <Header>Bienvenido a la aplicación.</Header>
 
             <View style={styles.buttons}>
                 <Button mode={tipo === "Usuario" ? "contained" : "outlined"} onPress={() => setTipo("Usuario")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 13 }}>
@@ -62,6 +62,7 @@ export default function LoginScreen({ navigation }) {
                 textContentType="emailAddress"
                 keyboardType="email-address"
             />
+
             <TextInput
                 label="Contraseña"
                 returnKeyType="done"
@@ -72,7 +73,6 @@ export default function LoginScreen({ navigation }) {
                 secureTextEntry
             />
 
-
             <View style={styles.forgotPassword}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('ResetPasswordScreen')}
@@ -80,10 +80,10 @@ export default function LoginScreen({ navigation }) {
                     <Text style={styles.forgot}>¿Olvidó su contraseña?</Text>
                 </TouchableOpacity>
             </View>
+            
             <Button mode="contained" onPress={onLoginPressed} icono={faRightFromBracket}>
                 Iniciar Sesión
             </Button>
-
 
 
             {
