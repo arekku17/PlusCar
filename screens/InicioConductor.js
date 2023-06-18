@@ -12,7 +12,8 @@ const InicioConductor = ({ navigation }) => {
     <Tab.Navigator
       screenOptions={{
         tabBarItemStyle: { padding: 10 },
-        tabBarStyle: {height: 70}
+        tabBarStyle: {height: 70},
+        headerShown: false
       }}
     >
       <Tab.Screen name="Servicios" component={Servicios} options={{

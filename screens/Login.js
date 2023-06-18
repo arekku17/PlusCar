@@ -35,80 +35,81 @@ export default function LoginScreen({ navigation }) {
 
     return (
         <Background>
-            <Logo />
-            <Header>Bienvenido a la aplicación.</Header>
+            <View style={{flex: 1, width: "100%", maxWidth: 350, padding: 5, alignItems: 'center', justifyContent: 'center'}}>
+                <Logo />
+                <Header>Bienvenido a la aplicación.</Header>
 
-            <View style={styles.buttons}>
-                <Button mode={tipo === "Usuario" ? "contained" : "outlined"} onPress={() => setTipo("Usuario")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 13 }}>
-                    Usuario
-                </Button>
-                <Button mode={tipo === "Conductor" ? "contained" : "outlined"} onPress={() => setTipo("Conductor")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 10 }}>
-                    Conductor
-                </Button>
-                <Button mode={tipo === "Admin" ? "contained" : "outlined"} onPress={() => setTipo("Admin")} style={{ flex: 1 }} labelStyle={{ fontSize: 13 }}>
-                    Admin
-                </Button>
-            </View>
-
-            <TextInput
-                label="Correo electrónico"
-                returnKeyType="next"
-                value={email.value}
-                onChangeText={(text) => setEmail({ value: text, error: '' })}
-                error={!!email.error}
-                errorText={email.error}
-                autoCapitalize="none"
-                autoCompleteType="email"
-                textContentType="emailAddress"
-                keyboardType="email-address"
-            />
-
-            <TextInput
-                label="Contraseña"
-                returnKeyType="done"
-                value={password.value}
-                onChangeText={(text) => setPassword({ value: text, error: '' })}
-                error={!!password.error}
-                errorText={password.error}
-                secureTextEntry
-            />
-
-            <View style={styles.forgotPassword}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('ResetPasswordScreen')}
-                >
-                    <Text style={styles.forgot}>¿Olvidó su contraseña?</Text>
-                </TouchableOpacity>
-            </View>
-            
-            <Button mode="contained" onPress={onLoginPressed} icono={faRightFromBracket}>
-                Iniciar Sesión
-            </Button>
-
-
-            {
-                tipo === "Usuario" && <>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
-                        <View>
-
-                            <Text style={{ width: 50, textAlign: 'center' }}>o</Text>
-                        </View>
-                        <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
-                    </View>
-
-                    <Button mode="outlined" onPress={() => { }} icono={faGoogle}>
-                        <Text> Continuar con Google </Text>
+                <View style={styles.buttons}>
+                    <Button mode={tipo === "Usuario" ? "contained" : "outlined"} onPress={() => setTipo("Usuario")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 13 }}>
+                        Usuario
                     </Button>
-                    <View style={styles.row}>
-                        <Text>¿No tienes una cuenta? </Text>
-                        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-                            <Text style={styles.link}>Registrarse</Text>
-                        </TouchableOpacity>
-                    </View>
-                </>
-            }
+                    <Button mode={tipo === "Conductor" ? "contained" : "outlined"} onPress={() => setTipo("Conductor")} style={{ flex: 1, marginRight: 10 }} labelStyle={{ fontSize: 10 }}>
+                        Conductor
+                    </Button>
+                    <Button mode={tipo === "Admin" ? "contained" : "outlined"} onPress={() => setTipo("Admin")} style={{ flex: 1 }} labelStyle={{ fontSize: 13 }}>
+                        Admin
+                    </Button>
+                </View>
 
+                <TextInput
+                    label="Correo electrónico"
+                    returnKeyType="next"
+                    value={email.value}
+                    onChangeText={(text) => setEmail({ value: text, error: '' })}
+                    error={!!email.error}
+                    errorText={email.error}
+                    autoCapitalize="none"
+                    autoCompleteType="email"
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
+                />
+
+                <TextInput
+                    label="Contraseña"
+                    returnKeyType="done"
+                    value={password.value}
+                    onChangeText={(text) => setPassword({ value: text, error: '' })}
+                    error={!!password.error}
+                    errorText={password.error}
+                    secureTextEntry
+                />
+
+                <View style={styles.forgotPassword}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('ResetPasswordScreen')}
+                    >
+                        <Text style={styles.forgot}>¿Olvidó su contraseña?</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <Button mode="contained" onPress={onLoginPressed} icono={faRightFromBracket}>
+                    Iniciar Sesión
+                </Button>
+
+
+                {
+                    tipo === "Usuario" && <>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
+                            <View>
+
+                                <Text style={{ width: 50, textAlign: 'center' }}>o</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: theme.colors.button }} />
+                        </View>
+
+                        <Button mode="outlined" onPress={() => { }} icono={faGoogle}>
+                            <Text> Continuar con Google </Text>
+                        </Button>
+                        <View style={styles.row}>
+                            <Text>¿No tienes una cuenta? </Text>
+                            <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+                                <Text style={styles.link}>Registrarse</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </>
+                }
+            </View>
         </Background>
     )
 }
