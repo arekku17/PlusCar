@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, ToastAndroid } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -12,6 +12,10 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { loginAuthAdmin, loginAuthConductor, loginAuthUsuario } from '../api/auth'
+import * as SecureStore from 'expo-secure-store';
+
+import Toast from 'react-native-toast-message';
 
 
 export default function LoginScreen({ navigation }) {
@@ -19,7 +23,7 @@ export default function LoginScreen({ navigation }) {
     const [password, setPassword] = useState({ value: '', error: '' })
     const [tipo, setTipo] = useState('Usuario');
 
-    const onLoginPressed = () => {
+    const onLoginPressed = async () => {
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
         if (emailError || passwordError) {
@@ -27,15 +31,69 @@ export default function LoginScreen({ navigation }) {
             setPassword({ ...password, error: passwordError })
             return
         }
-        navigation.reset({
-            index: 0,
-            routes: [{ name: tipo }],
-        })
+
+        if (tipo === "Usuario") {
+            await loginAuthUsuario({ correo: email.value, password: password.value }).then(async (res) => {
+                Toast.show({
+                    type: 'success',
+                    text1: "Inicio de sesión exitoso"
+                  });
+                await SecureStore.setItemAsync("token", res.data.token);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: tipo }],
+                })
+            }).catch((err) => {
+                Toast.show({
+                    type: 'error',
+                    text1: err.response.data.message
+                  });
+            });
+        }
+
+        else if (tipo === "Conductor") {
+            await loginAuthConductor({ correo: email.value, password: password.value }).then(async (res) => {
+                Toast.show({
+                    type: 'success',
+                    text1: "Inicio de sesión exitoso"
+                  });
+                await SecureStore.setItemAsync("token", res.data.token);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: tipo }],
+                });
+            }).catch((err) => {
+                Toast.show({
+                    type: 'error',
+                    text1: err.response.data.message
+                  });
+            });
+        }
+
+        else if (tipo === "Admin") {
+            await loginAuthAdmin({ correo: email.value, password: password.value }).then(async (res) => {
+                Toast.show({
+                    type: 'success',
+                    text1: "Inicio de sesión exitoso"
+                  });
+                await SecureStore.setItemAsync("token", res.data.token);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: tipo }],
+                })
+            }).catch((err) => {
+                Toast.show({
+                    type: 'error',
+                    text1: err.response.data.message
+                  });
+            });
+        }
+
     }
 
     return (
         <Background>
-            <View style={{flex: 1, width: "100%", maxWidth: 350, padding: 5, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{ flex: 1, width: "100%", maxWidth: 350, padding: 5, alignItems: 'center', justifyContent: 'center' }}>
                 <Logo />
                 <Header>Bienvenido a la aplicación.</Header>
 
