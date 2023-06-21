@@ -12,7 +12,8 @@ const InicioUsuario = ({ navigation }) => {
     <Tab.Navigator
       screenOptions={{
         tabBarItemStyle: { padding: 10 },
-        tabBarStyle: {height: 70}
+        tabBarStyle: {height: 70},
+        headerShown: false
       }}
     >
       <Tab.Screen name="Taxistas" component={Taxistas} options={{
