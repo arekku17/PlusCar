@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import DatePicker from 'react-native-datepicker';
 import Background from '../../components/Background';
 
 const Combis = () => {
   const [selectedRoute, setSelectedRoute] = useState('');
   const [selectedSeat, setSelectedSeat] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
 
   const handleRouteChange = (route) => {
     setSelectedRoute(route);
@@ -13,6 +16,14 @@ const Combis = () => {
 
   const handleSeatChange = (seat) => {
     setSelectedSeat(seat);
+  };
+
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   return (
@@ -23,9 +34,28 @@ const Combis = () => {
       <View style={styles.content}>
         <View style={styles.rectangle}>
           <Text style={styles.rectangleText}>Fecha</Text>
+          <DatePicker
+            style={styles.datePicker}
+            mode="date"
+            placeholder="Seleccionar fecha"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirmar"
+            cancelBtnText="Cancelar"
+            onDateChange={handleDateChange}
+          />
         </View>
         <View style={styles.rectangle}>
           <Text style={styles.rectangleText}>Horarios</Text>
+          <Picker
+            selectedValue={selectedTime}
+            onValueChange={handleTimeChange}
+            style={styles.picker}
+          >
+            <Picker.Item label="09:00 AM" value="09:00" />
+            <Picker.Item label="12:00 PM" value="12:00" />
+            <Picker.Item label="03:00 PM" value="15:00" />
+            <Picker.Item label="06:00 PM" value="18:00" />
+          </Picker>
         </View>
         <View style={styles.rectangle}>
           <Text style={styles.rectangleText}>Ruta</Text>
@@ -37,7 +67,7 @@ const Combis = () => {
             <Picker.Item label="Campeche" value="campeche" />
             <Picker.Item label="Champotón" value="champoton" />
             <Picker.Item label="Escarcega" value="escarcega" />
-            <Picker.Item label="Seiba Playa" value="seiba_playa" />
+            <Picker.Item label="Seiba Playa" value="seyba_playa" />
           </Picker>
         </View>
         <View style={styles.rectangle}>
@@ -112,6 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
+    marginTop: 16,
   },
   buttonText: {
     color: 'blue',
@@ -119,6 +150,10 @@ const styles = StyleSheet.create({
   },
   picker: {
     color: 'black',
+  },
+  datePicker: {
+    width: '100%',
+    marginTop: 8,
   },
 });
 
