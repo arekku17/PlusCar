@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Background from '../../components/Background';
 
-const Viajes = () => {
+const Viajes1 = () => {
   return (
     <Background>
       <View style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 10 }}>
